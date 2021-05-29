@@ -12,7 +12,7 @@ let init = function(){
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xababab);
 
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.3, 1000);
     camera.position.z = 5;
     // camera.position.y = -1;
 

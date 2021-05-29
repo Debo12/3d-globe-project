@@ -1,17 +1,13 @@
 let scene, camera, renderer, sphere;
 let ADD = 0.01;
 
-let createSphere = function(){
-    let shape = new THREE.SphereGeometry(5, 30, 30);
-    // let material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+let createTorus = function(){
+    let shape = new THREE.TorusGeometry(5, 1, 30, 30, 2*Math.PI); // radis, tube, radialsegments, tubularsegment, arc
+    let material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
 
-    let material = new THREE.MeshBasicMaterial({
-        map: loader.load('land_ocean_ice_cloud_2048.jpg'),
-      });
+    torus = new THREE.Mesh(shape, material);
 
-    sphere = new THREE.Mesh(shape, material);
-
-    scene.add(sphere);
+    scene.add(torus);
 }
 
 let init = function(){
@@ -19,9 +15,9 @@ let init = function(){
     scene.background = new THREE.Color(0x000000);
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 20;
+    camera.position.z = 25;
 
-    createSphere();
+    createTorus();
 
     renderer = new THREE.WebGLRenderer();   
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -30,7 +26,8 @@ let init = function(){
 }
 
 let mainLoop = function() {
-    sphere.rotation.y += ADD;
+    torus.rotation.x += ADD;
+    torus.rotation.y += ADD;
     requestAnimationFrame(mainLoop);
     renderer.render(scene, camera);
 };
